@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Update Google Maps API to include places library -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places"></script>
+</head>
+
+<body>
+    <nav class="main-nav">
+        <div class="container nav-container">
+            <h2 class="nav-logo">EvenOK</h2>
+            <ul class="nav-links">
+                <li><a href="#" class="active" id="register-link">Register Event</a></li>
+                <li><a href="#" id="events-link">View Events</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" id="register-section">
+        <div class="form-container">
+            <h1>Event Registration</h1>
+            <form id="eventForm">
+                <div class="form-group">
+                    <label for="eventName">Event Name</label>
+                    <input type="text" id="eventName" name="eventName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="organizerName">Organizer Name</label>
+                    <input type="text" id="organizerName" name="organizerName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Event Date</label>
+                    <input type="datetime-local" id="date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <div class="map-controls">
+                        <div class="search-container">
+                            <input type="text" id="location-search" placeholder="Search for a location">
+                            <button type="button" id="current-location" class="current-btn">
+                                <span>My Location</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="map"></div>
+                    <input type="text" id="locationAddress" readonly
+                        placeholder="Click on map or search to set location">
+                    <input type="hidden" id="lat" name="lat">
+                    <input type="hidden" id="lng" name="lng">
+                </div>
+
+                <button type="submit" class="submit-btn">Register Event</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container" id="events-section" style="display: none;">
+        <div class="events-container">
+            <h1>Registered Events</h1>
+            <div class="filter-controls">
+                <input type="text" id="event-search" placeholder="Search events...">
+                <select id="event-sort">
+                    <option value="date-asc">Date (Upcoming first)</option>
+                    <option value="date-desc">Date (Recent first)</option>
+                    <option value="name-asc">Name (A-Z)</option>
+                    <option value="name-desc">Name (Z-A)</option>
+                </select>
+            </div>
+            <div id="events-list" class="events-list">
+                <!-- Events will be loaded here -->
+                <div class="loading">Loading events...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
