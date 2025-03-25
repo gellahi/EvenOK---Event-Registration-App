@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const { resolve } = require('path');
+const fs = require('fs');
 const Event = require('./models/Event');
 
 const app = express();
@@ -23,7 +24,14 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 // Routes
 app.get('/', (req, res) => {
-  res.sendFile(resolve(__dirname, 'pages/index.html'));
+  // Read the HTML file
+  let htmlContent = fs.readFileSync(resolve(__dirname, 'pages/index.html'), 'utf8');
+
+  // Replace the API key placeholder with the actual key from environment variables
+  htmlContent = htmlContent.replace('GOOGLE_MAPS_API_KEY_PLACEHOLDER', process.env.GOOGLE_MAPS_API_KEY);
+
+  // Send the modified HTML
+  res.send(htmlContent);
 });
 
 // Create a new event
